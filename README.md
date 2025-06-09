@@ -1,0 +1,1 @@
+E um projeto complementar da PI (Projeto Integrador da Faculdade) e essa janela exibe os graficos em barra de um arquivo txt, Planejo desenvolver uma maneira de fazer ela se comunicar com o Banco de Dados para pegar informações diretamente.
