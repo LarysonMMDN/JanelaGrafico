@@ -78,8 +78,4 @@ public class JanelaRelatorio {
         return abasDados;
     }
 
-    public static void main(String[] args) {
-        JFrame mainFrame = JanelaRelatorio.paginaRelatorio();
-        mainFrame.setVisible(true);
-    }
 }
