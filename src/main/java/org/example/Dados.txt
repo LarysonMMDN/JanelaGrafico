@@ -1,4 +1,0 @@
-Plateia A|Plateia B|Frisa|Camarote|Balcão Nobre
-Manhã;12;15;22;15;22;
-Tarde;12;23;11;22;30;
-Noite;11;22;20;32;19;
