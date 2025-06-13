@@ -15,6 +15,7 @@ import java.io.*;
 public class Dados {
     private static String[] tipoAssento = {"Plateia A", "Plateia B", "Frisa", "Camarote", "Balcão Nobre"};
     private static String caminhoIco = "src/main/resources/Miguire.png";
+    private static Utils util = new Utils();
 
     // Dados registrados da parte da Manhã
     public static ChartPanel dadosManha(int[] dadosManha){
@@ -142,8 +143,9 @@ public class Dados {
     public static JPanel mostrarLPA(ChartPanel chart, int[] dados){
         JPanel painel = new JPanel();
         painel.setLayout(null);
-        chart.setBounds(0, 0, 578, 383);
-        JButton botao = Dados.criarBotao("Lucro por Assento", dados);
+        chart.setBounds(0, 0, 700, 383);
+        int[] posicao = {490, 400, 200, 50};
+        JButton botao = util.criarBotao("Lucro por Assento", posicao, dados);
         painel.add(botao);
         painel.add(chart);
         return painel;
