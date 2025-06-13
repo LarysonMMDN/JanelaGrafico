@@ -8,9 +8,21 @@ import static org.example.JanelaRelatorio.abasRelatorio;
 public class PaginaADM {
     private static final int ALTURA = 700;
     private static final int LARGURA = 1000;
-    private static String caminhoImagemHome = "src/main/resources/PGHome.png";
+    private static final String CAMINHO_IMAGEM_HOME = "src/main/resources/PGHome.png";
+
     private JFrame frame;
     private Utils util = new Utils();
+
+    // Constantes para posições de componentes
+    private static final int[] POSICAO_PAINEL_SUPERIOR = {0, 0, LARGURA - 15, 125};
+    private static final int[] POSICAO_PAINEL_LATERAL = {0, 125, 275, 575 - 30};
+    private static final int[] POSICAO_PAINEL_CENTRAL = {275, 125, 725 - 15, 575 - 30};
+    private static final int[] POSICAO_LABEL_TITULO = {(LARGURA - 400) / 2, (125 - 80) / 2, 400, 80};
+    private static final int[] POSICAO_LABEL_HOME = {(POSICAO_PAINEL_CENTRAL[2] - 500) / 2, (POSICAO_PAINEL_CENTRAL[3] - 500) / 2, 500, 500};
+
+    private JPanel painelSuperior;
+    private JPanel painelLateral;
+    private JPanel painelCentral;
 
     public PaginaADM() {
         inicializarFrame();
@@ -21,7 +33,6 @@ public class PaginaADM {
         frame.setSize(LARGURA, ALTURA);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
-        //frame.setResizable(false);
         frame.setLayout(null);
     }
 
@@ -31,39 +42,38 @@ public class PaginaADM {
     }
 
     private void montarHomePage() {
-
-        // Array de posições dos Paineis
-        int[] posicaoPainelSuperior = {0, 0, LARGURA - 15, 125};
-        int[] posicaoPainelLateral = {0, 125, 275, 575 - 30};
-        int[] posicaoPainelCentral = {275, 125, 725 - 15, 575 - 30};
-
-        // Array de posições dos Labels
-        int[] posicaoLabelTitulo = {(LARGURA - 400) / 2, (125 - 80) / 2, 400, 80};
-        int[] posicaoLabelHome = {(posicaoPainelCentral[2] - 500) / 2, (posicaoPainelCentral[3] - 500) / 2, 500, 500};
-
-        // Array de posições dos Botões
-        int[] posicaoBotaoPecaA =  {(posicaoPainelLateral[2] - 200) / 2, 50, 200, 50};
-        int[] posicaoBotaoPecaB =  {(posicaoPainelLateral[2] - 200) / 2, 110, 200, 50};
-        int[] posicaoBotaoPecaC =  {(posicaoPainelLateral[2] - 200) / 2, 170, 200, 50};
-        int[] posicaoBotaoTotais = {(posicaoPainelLateral[2] - 200) / 2, 230, 200, 50};
-        int[] posicaoBotaoSair =   {(posicaoPainelLateral[2] - 200) / 2, 290, 200, 50};
-
-
-        JPanel painelSuperior = util.criarPainel(posicaoPainelSuperior);
-        JPanel painelLateral = util.criarPainel(posicaoPainelLateral);
-        JPanel painelCentral = util.criarPainel(posicaoPainelCentral);
+        painelSuperior = util.criarPainel(POSICAO_PAINEL_SUPERIOR);
+        painelLateral = util.criarPainel(POSICAO_PAINEL_LATERAL);
+        painelCentral = util.criarPainel(POSICAO_PAINEL_CENTRAL);
 
         painelSuperior.setBackground(Color.RED);
         painelLateral.setBackground(Color.BLACK);
         painelCentral.setBackground(Color.WHITE);
 
         // Titulo Painel Superior
-        JLabel tituloPainel = util.criarLabel("Pagina de ADM", 50, posicaoLabelTitulo);
+        JLabel tituloPainel = util.criarLabel("Pagina de ADM", 50, POSICAO_LABEL_TITULO);
         painelSuperior.add(tituloPainel);
 
         // Logo Pagina Inicial
-        JLabel ImagemHome = util.criarLabel(caminhoImagemHome, posicaoLabelHome);
+        JLabel imagemHome = util.criarLabel(CAMINHO_IMAGEM_HOME, POSICAO_LABEL_HOME);
+        painelCentral.add(imagemHome);
+
+        painelSuperior.setBackground(Color.RED);
+        painelLateral.setBackground(Color.BLACK);
+        painelCentral.setBackground(Color.WHITE);
+
+        // Logo Pagina Inicial
+        JLabel ImagemHome = util.criarLabel(CAMINHO_IMAGEM_HOME, POSICAO_LABEL_HOME);
         painelCentral.add(ImagemHome);
+
+        //
+        int posx = (POSICAO_PAINEL_LATERAL[2] - 200) / 2;
+        int[] posicaoBotaoPecaA = {posx, 50, 200, 50};
+        int[] posicaoBotaoPecaB = {posx, 110, 200, 50};
+        int[] posicaoBotaoPecaC = {posx, 170, 200, 50};
+        int[] posicaoBotaoTotais = {posx, 230, 200, 50};
+        int[] posicaoBotaoSair = {posx, 290, 200, 50};
+
 
         // Botões Da Pagina Lateral
         JButton botaoPecaA = util.criarBotao("Peça A", posicaoBotaoPecaA);
@@ -73,12 +83,11 @@ public class PaginaADM {
         JButton botaoSair = util.criarBotao("Sair", posicaoBotaoSair);
 
         // Coração
-        botaoPecaA.addActionListener(e -> {
-            painelCentral.removeAll();
-            paginaDados(painelCentral);
-            painelCentral.revalidate();
-            painelCentral.repaint();
-        });
+        botaoPecaA.addActionListener(e -> paginaDados(painelCentral));
+        botaoPecaB.addActionListener(e -> paginaDados(painelCentral));
+        botaoPecaC.addActionListener(e -> paginaDados(painelCentral));
+        botaoDadosTotais.addActionListener(e -> paginaDados(painelCentral));
+        botaoSair.addActionListener(e -> frame.dispose());
 
         // Adiconando Botões ao Painel Lateral
         painelLateral.add(botaoPecaA);
@@ -92,14 +101,16 @@ public class PaginaADM {
         frame.add(painelSuperior);
     }
 
+
     public JPanel paginaDados(JPanel painel){
+        painel.removeAll();
         JTabbedPane dados = abasRelatorio();
         dados.setBounds(0, 50, 725, 525);
         painel.add(dados);
+        painel.revalidate();
+        painel.repaint();
         return painel;
     }
-
-
 
     public static void main(String[] args) {
         PaginaADM paginaADM = new PaginaADM();

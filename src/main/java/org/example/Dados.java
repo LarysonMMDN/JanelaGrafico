@@ -12,9 +12,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 
+
 public class Dados {
     private static String[] tipoAssento = {"Plateia A", "Plateia B", "Frisa", "Camarote", "Balcão Nobre"};
-    private static String caminhoIco = "src/main/resources/Miguire.png";
+    private static String caminhoImagemHome = "src/main/resources/PGHome.png";
     private static Utils util = new Utils();
 
     // Dados registrados da parte da Manhã
@@ -140,47 +141,19 @@ public class Dados {
         return total;
     }
 
-    public static JPanel mostrarLPA(ChartPanel chart, int[] dados){
+    public static JPanel mostrarLPA(ChartPanel chart, int[] dados) {
         JPanel painel = new JPanel();
         painel.setLayout(null);
-        chart.setBounds(0, 0, 700, 383);
-        int[] posicao = {490, 400, 200, 50};
-        JButton botao = util.criarBotao("Lucro por Assento", posicao, dados);
-        painel.add(botao);
+
+        chart.setBounds(0, 0, 700, 400);
         painel.add(chart);
+
+        int[] posicaoBotao = {500, 410, 200, 50};
+        JButton botaoLucro = util.criarBotao("Lucro por Assento", posicaoBotao, dados);
+        painel.add(botaoLucro);
+
         return painel;
     }
 
-    public static JButton criarBotao(String texto, int[] dados){
-        JButton botao = new JButton(texto);
-        botao.setFocusPainted(false);
-        botao.setBounds(458, 353, 120, 30);
-        botao.addActionListener(e -> {
-            popup(dados);
-        });
-        return botao;
-    }
 
-
-    public static void popup(int[] dados){
-        ImageIcon novaImagem = ResizingImage(50, 50, caminhoIco);
-        JOptionPane.showMessageDialog(
-                null,
-                "<html><b>Lucro assento Plateia A:</b>  R$ "   + dados[0] * 40 + "</html>\n" +
-                        "<html><b>Lucro assento Plateia B:</b> R$ "    + dados[1] * 60 + "</html>\n" +
-                        "<html><b>Lucro assento Frisa:</b> R$ "        + dados[2] * 120 + "</html>\n" +
-                        "<html><b>Lucro assento Camarote:</b> R$ "     + dados[3] * 80 + "</html>\n" +
-                        "<html><b>Lucro assento Balcão Nobre:</b> R$ " + dados[4] * 250 + "</html>\n",
-                "Relatorio LPA",
-                JOptionPane.PLAIN_MESSAGE,
-                novaImagem
-        );
-
-    }
-    public static ImageIcon ResizingImage(int altura, int largura, String caminhoImagem) {
-        ImageIcon imagemOriginal = new ImageIcon(caminhoImagem);
-        Image imagemRedimensionada  = imagemOriginal.getImage().getScaledInstance(largura, altura, Image.SCALE_SMOOTH);
-        ImageIcon novaImagem = new ImageIcon(imagemRedimensionada );
-        return novaImagem;
-    }
 }

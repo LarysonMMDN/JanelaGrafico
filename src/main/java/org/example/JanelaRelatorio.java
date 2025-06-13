@@ -33,6 +33,7 @@ public class JanelaRelatorio {
 
         JTabbedPane dados = abasRelatorio();
         dados.setBounds(0, 50, 583, 410);
+        dados.repaint();
 
         frame.add(painel);
         frame.add(dados);
@@ -42,13 +43,9 @@ public class JanelaRelatorio {
 
 
     public static JTabbedPane abasRelatorio() {
-        try {
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         JTabbedPane abasDados = new JTabbedPane();
+        abasDados.setBounds(0, 0, 700, 550);
         abasDados.setFocusable(false);
 
         // Coleta de dados
@@ -69,6 +66,7 @@ public class JanelaRelatorio {
         JPanel noitePanel = Dados.mostrarLPA(noiteChart, DBNoite);
         JPanel totalPanel = Dados.mostrarLPA(totalChart, DBTotal);
 
+
         // Adicona as abas
         abasDados.addTab("Manhã", manhaPanel);
         abasDados.addTab("Tarde", tardePanel);
@@ -76,10 +74,6 @@ public class JanelaRelatorio {
         abasDados.addTab("Total", totalPanel);
 
         return abasDados;
-    }
-
-    public static void main(String[] args) {
-        JFrame mainFrame = new JFrame();
     }
 
 }
