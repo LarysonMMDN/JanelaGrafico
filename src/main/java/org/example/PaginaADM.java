@@ -83,9 +83,9 @@ public class PaginaADM {
         JButton botaoSair = util.criarBotao("Sair", posicaoBotaoSair);
 
         // Coração
-        botaoPecaA.addActionListener(e -> paginaDados(painelCentral));
-        botaoPecaB.addActionListener(e -> paginaDados(painelCentral));
-        botaoPecaC.addActionListener(e -> paginaDados(painelCentral));
+        botaoPecaA.addActionListener(e -> paginaDados(painelCentral, "PecaA"));
+        botaoPecaB.addActionListener(e -> paginaDados(painelCentral, "PecaB"));
+        botaoPecaC.addActionListener(e -> paginaDados(painelCentral, "PecaC"));
         botaoDadosTotais.addActionListener(e -> paginaDados(painelCentral));
         botaoSair.addActionListener(e -> frame.dispose());
 
@@ -101,6 +101,16 @@ public class PaginaADM {
         frame.add(painelSuperior);
     }
 
+
+    public JPanel paginaDados(JPanel painel, String peca){
+        painel.removeAll();
+        JTabbedPane dados = abasRelatorio(peca);
+        dados.setBounds(0, 50, 725, 525);
+        painel.add(dados);
+        painel.revalidate();
+        painel.repaint();
+        return painel;
+    }
 
     public JPanel paginaDados(JPanel painel){
         painel.removeAll();

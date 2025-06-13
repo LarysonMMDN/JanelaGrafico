@@ -50,9 +50,7 @@ public class Utils {
         botao.setForeground(Color.WHITE);
         botao.setFocusPainted(false);
         botao.setBounds(pos[0], pos[1], pos[2], pos[3]);
-        botao.addActionListener(e -> {
-            popup(dados);
-        });
+        botao.addActionListener(e -> popup(dados));
         return botao;
     }
 
